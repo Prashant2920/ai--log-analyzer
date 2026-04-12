@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+
+# Cache
+*.cache
+
+# ML artifacts (if any)
+*.pkl
+*.joblib
