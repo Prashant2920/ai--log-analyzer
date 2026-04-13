@@ -2,42 +2,61 @@ name: AI Log Analyzer CI/CD
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 🔹 Checkout
+      # 🔹 Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
+
+      # 🔹 Install AWS CLI
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      # 🔹 Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      # 🔹 Update kubeconfig for EKS
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig \
+            --region ap-south-1 \
+            --name ai-log-cluster-v2
+
+      # 🔹 Verify cluster connection
+      - name: Check cluster
+        run: kubectl get nodes
 
       # 🔹 Docker login
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      # 🔹 Build Backend
+      # 🔹 Build Backend Image
       - name: Build Backend Image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ai-log-analyzer-backend:latest ./backend
 
-      # 🔹 Push Backend
+      # 🔹 Push Backend Image
       - name: Push Backend Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/ai-log-analyzer-backend:latest
 
-      # 🔹 Build Generator
+      # 🔹 Build Generator Image
       - name: Build Generator Image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/ai-log-generator:latest ./log-generator
 
-      # 🔹 Push Generator
+      # 🔹 Push Generator Image
       - name: Push Generator Image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/ai-log-generator:latest
-
-      # 🔹 Setup kubeconfig
-      - name: Set up Kubeconfig
-        run: |
-          mkdir -p $HOME/.kube
-          echo "${{ secrets.KUBECONFIG }}" > $HOME/.kube/config
 
       # 🔹 Deploy to Kubernetes
       - name: Deploy to K8s
