@@ -8,8 +8,9 @@ __pycache__/
 venv/
 env/
 
-# Docker
+# Docker / logs
 *.log
+logs/
 
 # OS
 .DS_Store
@@ -23,3 +24,10 @@ env/
 # ML artifacts (if any)
 *.pkl
 *.joblib
+
+# Minikube / binaries
+minikube*
+*.iso
+
+# Kubernetes configs (optional safety)
+.kube/
