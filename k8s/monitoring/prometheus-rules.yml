@@ -1,0 +1,20 @@
+groups:
+  - name: anomaly-alerts
+    rules:
+      - alert: HighAnomalyRate
+        expr: rate(anomaly_count_total[1m]) > 0.5
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "High anomaly rate detected"
+          description: "Anomaly rate is above threshold"
+
+      - alert: HighRequestRate
+        expr: rate(request_count_total[1m]) > 10
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High request rate"
+          description: "Traffic spike detected"

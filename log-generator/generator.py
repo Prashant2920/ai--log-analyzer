@@ -5,7 +5,7 @@ from datetime import datetime
 
 endpoints = ["/login", "/dashboard", "/api/data", "/logout"]
 
-API_URL = "http://backend:8000/predict"
+API_URL = "http://backend-service:8000/predict"
 
 def generate_log():
     endpoint = random.choice(endpoints)
