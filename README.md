@@ -256,11 +256,6 @@ kubectl apply -f k8s/
 
 ---
 
-### 🔍 Prometheus Query UI
-
-![Prometheus Query](screenshots/prometheus-query.png)
-
----
 
 ### ⚡ FastAPI Running on AWS EKS
 
@@ -297,7 +292,3 @@ kubectl apply -f k8s/
 ![HPA](screenshots/hpa.png)
 
 ---
-
-### ❤️ Service Health (Backend Up)
-
-![Target Health](screenshots/target-health.png)
