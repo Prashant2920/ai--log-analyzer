@@ -12,7 +12,7 @@ This project demonstrates a **complete end-to-end pipeline**:
 ---
 
 ## 🧠 Features
-
+'''
 🔥 Real-time log generation
 🤖 ML-based anomaly detection (Isolation Forest)
 📊 Prometheus metrics collection
@@ -22,7 +22,7 @@ This project demonstrates a **complete end-to-end pipeline**:
 ⚡ Auto-scaling (HPA)
 🔁 CI/CD pipeline (GitHub Actions)
 ☁️ Cloud deployment on AWS EKS
-
+'''
 ---
 
 ## 🧱 System Architecture
