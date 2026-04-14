@@ -11,7 +11,7 @@ This project demonstrates a **complete end-to-end pipeline**:
 
 ---
 
-## 🧠 Features
+## 🧠 Features 
 ```
 🔥 Real-time log generation
 🤖 ML-based anomaly detection (Isolation Forest)
